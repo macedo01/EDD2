@@ -107,11 +107,29 @@ public class ListaDupla {
             return null;
         } else if (posicao == 0) {
             return retirarInicio();
-        }else if (posicao == tamanho -1) {
+        } else if (posicao == tamanho -1) {
             return retirarFim();
         }
         No local = inicio;
         for(int i= 0 ; i < posicao; i++) {
+            local = local.proximo;
+        }
+        if(local.anterior != null) {
+            local.anterior.proximo = local.proximo;
+        }
+        if(local.proximo != null) {
+            local.proximo.anterior = local.anterior;
+        }
+        tamanho--;
+        return local.info;
+    }
+
+    public String retirarPeloNome(String nome) {
+        if(nome == null || inicio == null) {
+            return null;
+        }
+        No local = inicio;
+        for(int i = 0; local.info != nome; i++){
             local = local.proximo;
         }
         if(local.anterior != null) {
